@@ -1,23 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>上传文件和图片</title>
+	<title>提交图片并显示</title>
+	<style>
+		body {
+			background-image: url('背景图路径');
+			background-size: cover;
+			background-position: center;
+			font-family: Arial, sans-serif;
+		}
+
+		form {
+			margin-top: 50px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		label {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+
+		input[type=file] {
+			font-size: 16px;
+			padding: 10px;
+			border: none;
+			background-color: #f2f2f2;
+			border-radius: 5px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			margin-bottom: 20px;
+		}
+
+		input[type=submit] {
+			font-size: 18px;
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		input[type=submit]:hover {
+			background-color: #3e8e41;
+		}
+
+		img {
+			max-width: 100%;
+			margin-top: 20px;
+		}
+	</style>
 </head>
 <body>
-	<h1>上传文件和图片</h1>
-	<form action="" method="POST" enctype="multipart/form-data">
-		<p>
-			<label for="file">上传文件:</label>
-			<input type="file" name="file" id="file">
-		</p>
-		<p>
-			<label for="image">上传图片:</label>
-			<input type="file" name="image" id="image">
-		</p>
-		<p>
-			<input type="submit" value="上传">
-		</p>
+	<form action="" method="post">
+		<label for="file">选择图片：</label>
+		<input type="file" id="file" name="file">
+		<input type="submit" value="提交">
 	</form>
+
+	<script>
+		const input = document.querySelector('input[type=file]');
+		const form = document.querySelector('form');
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const file = input.files[0];
+			const url = window.URL.createObjectURL(file);
+			const img = document.createElement('img');
+			img.src = url;
+			form.appendChild(img);
+		});
+	</script>
 </body>
 </html>
